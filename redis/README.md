@@ -1,1 +1,0 @@
-# deliveryservice_kotlin
