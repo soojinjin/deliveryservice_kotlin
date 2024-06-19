@@ -1,3 +1,4 @@
+/*
 package org.delivery.api.common.annotation;
 
 import org.springframework.core.annotation.AliasFor;
@@ -16,3 +17,4 @@ public @interface Converter {
     @AliasFor(annotation = Service.class)
     String value() default "";
 }
+*/

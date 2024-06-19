@@ -1,12 +1,15 @@
+/*
 package org.delivery.api.common.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+*/
 /**
  * USER의 경우 100번대 에러코드 사용
- */
+ *//*
+
 @AllArgsConstructor
 @Getter
 public enum UserErrorCode implements ErrorCodeIfs {
@@ -19,3 +22,4 @@ public enum UserErrorCode implements ErrorCodeIfs {
 
 
 }
+*/

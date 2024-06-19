@@ -1,3 +1,4 @@
+/*
 package org.delivery.api.config.objectmapper;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -33,3 +34,4 @@ public class ObjectMapperConfig {
     }
 
 }
+*/

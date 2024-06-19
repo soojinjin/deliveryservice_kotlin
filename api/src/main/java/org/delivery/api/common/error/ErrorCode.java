@@ -1,3 +1,4 @@
+/*
 package org.delivery.api.common.error;
 
 import lombok.AllArgsConstructor;
@@ -20,3 +21,4 @@ public enum ErrorCode implements ErrorCodeIfs {
 
 
 }
+*/

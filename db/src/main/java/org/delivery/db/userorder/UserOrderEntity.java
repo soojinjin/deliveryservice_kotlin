@@ -1,17 +1,19 @@
+/*
 package org.delivery.db.userorder;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import net.minidev.json.annotate.JsonIgnore;
 import org.delivery.db.BaseEntity;
+import org.delivery.db.store.StoreEntity;
 import org.delivery.db.userorder.enums.UserOrderStatus;
+import org.delivery.db.userordermenu.UserOrderMenuEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -26,12 +28,14 @@ public class UserOrderEntity extends BaseEntity {
     @Column(nullable = false)
     private Long userId; //user table 1:n
 
-    @Column(nullable = false)
-    private Long storeId;
+    @JoinColumn(nullable = false, name ="store_id")
+    @ManyToOne
+    private StoreEntity store; //store
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(50)", nullable = false)
     private UserOrderStatus status;
+
 
     @Column(precision = 11, scale =4, nullable = false)
     private BigDecimal amount;
@@ -46,4 +50,10 @@ public class UserOrderEntity extends BaseEntity {
 
     private LocalDateTime receivedAt;
 
+    @OneToMany(mappedBy ="userOrder")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<UserOrderMenuEntity> userOrderMenuList;
+
 }
+*/

@@ -1,3 +1,4 @@
+
 package org.delivery.api.domain.token.helper;
 
 
@@ -6,9 +7,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
-import org.delivery.api.common.error.ErrorCode;
-import org.delivery.api.common.error.TokenErrorCode;
-import org.delivery.api.common.exception.ApiException;
+import org.delivery.common.error.ErrorCode;
+import org.delivery.common.error.TokenErrorCode;
+import org.delivery.common.exception
+.ApiException;
 import org.delivery.api.domain.token.ifs.TokenHelperIfs;
 import org.delivery.api.domain.token.model.TokenDto;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +24,7 @@ import java.util.Map;
 
 @Component
 public class JwtTokenHelper implements TokenHelperIfs {
+
     @Value("${token.secret.key}")
     private String secretKey;
 
@@ -31,14 +34,16 @@ public class JwtTokenHelper implements TokenHelperIfs {
     @Value("${token.refresh-token.plus-hour}")
     private Long refreshTokenPlusHour;
 
-
     @Override
     public TokenDto issueAccessToken(Map<String, Object> data) {
         var expiredLocalDateTime = LocalDateTime.now().plusHours(accessTokenPlusHour);
+
         var expiredAt = Date.from(
                 expiredLocalDateTime.atZone(
                         ZoneId.systemDefault()
-                ).toInstant());
+                ).toInstant()
+        );
+
         var key = Keys.hmacShaKeyFor(secretKey.getBytes());
 
         var jwtToken = Jwts.builder()
@@ -56,10 +61,13 @@ public class JwtTokenHelper implements TokenHelperIfs {
     @Override
     public TokenDto issueRefreshToken(Map<String, Object> data) {
         var expiredLocalDateTime = LocalDateTime.now().plusHours(refreshTokenPlusHour);
+
         var expiredAt = Date.from(
                 expiredLocalDateTime.atZone(
                         ZoneId.systemDefault()
-                ).toInstant());
+                ).toInstant()
+        );
+
         var key = Keys.hmacShaKeyFor(secretKey.getBytes());
 
         var jwtToken = Jwts.builder()
@@ -82,26 +90,23 @@ public class JwtTokenHelper implements TokenHelperIfs {
                 .setSigningKey(key)
                 .build();
 
-        try{
-
+        try {
             var result = parser.parseClaimsJws(token);
             return new HashMap<String, Object>(result.getBody());
 
-        }catch (Exception e){
-            if(e instanceof SignatureException){
-                //토큰이 유효하지 않을 때
-                throw new ApiException(TokenErrorCode.INVALID_TOKEN, e);
-            }
-            else if(e instanceof ExpiredJwtException){
-                //만료된 토큰
-                throw new ApiException(TokenErrorCode.EXPIRED_TOKEN,e);
-            }
-            else{
-                //그외 에러
-                throw new ApiException(TokenErrorCode.TOKEN_EXCEPTION, e);
+        } catch (Exception e) {
 
+            if (e instanceof SignatureException) {
+                // 토큰이 유효하지 않을때
+                throw new ApiException(TokenErrorCode.INVALID_TOKEN, e);
+            } else if (e instanceof ExpiredJwtException) {
+                //  만료된 토큰
+                throw new ApiException(TokenErrorCode.EXPIRED_TOKEN, e);
+            } else {
+                // 그외 에러
+                throw new ApiException(TokenErrorCode.TOKEN_EXCEPTION, e);
             }
         }
-
     }
 }
+

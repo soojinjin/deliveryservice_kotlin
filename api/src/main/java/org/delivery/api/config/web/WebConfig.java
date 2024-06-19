@@ -1,3 +1,4 @@
+/*
 package org.delivery.api.config.web;
 
 import lombok.RequiredArgsConstructor;
@@ -46,3 +47,4 @@ public class WebConfig  implements WebMvcConfigurer {
         resolvers.add(userSessionResolver);
     }
 }
+*/
