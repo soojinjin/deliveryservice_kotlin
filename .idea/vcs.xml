@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/redis/deliveryservice_kotlin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/redis/deliveryservice_kotlin/deliveryservice_kotlin" vcs="Git" />
   </component>
 </project>
